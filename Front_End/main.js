@@ -6,6 +6,16 @@
 //jquery functions
 $(function () {
 
+    
+
+    //card text limit
+    $("p.card-text").text(function (index, currentText) {
+
+        return currentText.substr(0, 90) + ' ...';
+    });
+
+
+
     $('#loginButton').submit(function () {
 
         $.ajax({
