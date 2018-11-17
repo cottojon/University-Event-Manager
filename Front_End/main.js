@@ -6,7 +6,7 @@
 //jquery functions
 $(function () {
 
-    
+
 
     //card text limit
     $("p.card-text").text(function (index, currentText) {
@@ -214,14 +214,24 @@ $(function () {
 
     });
 
+    //create rso button click function
+    $('#createRSOBtn').on('click', function (e) {
+        console.log("in create rso function");
 
-    $('#createRSOBtn').on('click', function () {
-        console.log("in hererereer");
+        e.preventDefault(); //stop automatic refreshing
+
+
         //get rso info
-        var rsoTitle = $('#rsoTitle').text();
-        var rsoDescription = $('#rsoDescription').text();
+        var rsoTitle = $('#rsoTitle').val();
+        var rsoDescription = $('#rsoDescription').val();
         var rsoType = $('#rsoType option:selected').text();
         var rsoUniversity = $('#university option:selected').text();
+
+        //testing purposes
+        console.log(rsoTitle);
+        console.log(rsoDescription);
+        console.log(rsoType);
+        console.log(rsoUniversity);
 
         //create json object
         var obj = {
@@ -231,20 +241,75 @@ $(function () {
             "rsoUniversity": rsoUniversity
         };
 
-        //stringify the object
+        //stringify the object we can only send string in json format
         var jsonRSO = JSON.stringify(obj);
 
         $.ajax({
-            type: "POST",
-            url: "createRSO.php",
-            data: jsonRSO,
-            sucess: function () {
+            type: "POST", //type of request
+            url: "createRSO.php", //send to this endpoint
+            data: jsonRSO, //the json being sentr
+            sucess: function (message) { //if successful do this, message will be json response from backend
 
             },
-            error: function () {
-                console.log("failedddd");
+            error: function () { //if ajax request fails do this
+                alert("Server Error");
             }
         });
+    });
+
+
+    //create event button clicked function
+    $('#createEventBtn').on('click', function (e) {
+        e.preventDefault(); //stop automatic refreshing
+        console.log("in create event function");
+
+
+        //get event info
+        var eventTitle = $('#eventTitle').val();
+        var eventDescription = $('#eventDescription').val();
+        var eventType = $('#eventType option:selected').text();
+        var eventUniversity = $('#eventUniversity option:selected').text();
+
+
+        //get marker lat and longitude
+        var latitude = marker.position.lat();
+        var longitude = marker.position.lng();
+
+
+        //testing purposes view in  chrome/fireforx console if needed
+        console.log(eventTitle);
+        console.log(eventDescription);
+        console.log(eventType);
+        console.log(eventUniversity);
+        console.log(latitude);
+        console.log(longitude);
+
+        //create json object
+        var obj = {
+            "eventTitle": eventTitle,
+            "eventDesription": eventDescription,
+            "eventType": eventType,
+            "eventUniversity": eventUniversity,
+            "eventLatitude": latitude,
+            "eventLongitude": longitude
+        };
+
+        //stringify the object because we can only send string in json format
+        var jsonRSO = JSON.stringify(obj);
+
+
+        $.ajax({
+            type: "POST", //type of request
+            url: "createevent.php", //send to this end point
+            data: jsonRSO, //the json we are sending
+            sucess: function (message) { //what happens if we are succesful, message will be json response from backend
+
+            },
+            error: function () { //what happens if the ajax request fails
+                alert("Server Error");
+            }
+        });
+
     });
 
 
