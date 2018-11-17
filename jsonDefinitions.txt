@@ -1,4 +1,4 @@
-My Events tab click:
+My Events tab click: (main.js line 53)
 
 Frontend --> backend
     ?
@@ -32,7 +32,7 @@ Backend --> Frontend
 ************************************************************************************
 
 
-My RSO tab click:
+My RSO tab click: (main.js line 117)
 
 Frontend --> backend
     ?
@@ -73,7 +73,7 @@ Backend --> Frontend
 
 
 
-"More info" click in my events tab
+"More info" click in my events tab (main.js line 182)
 
 Frontend ---> backend
     "eventID": "...."
@@ -101,4 +101,43 @@ Frontend ---> backend
 Backend ---> Frontend
     rsoInfo (need to figure out all the info a rso page will display)
 
+
+
+
+***********************************************************************************
+
+"Create RSO" click  (main.js line 218)
+
+Frontend ---> backend
+
+var obj = {
+            "rsoTitle": rsoTitle,
+            "rsoDesription": rsoDescription,
+            "rsoType": rsoType,
+            "rsoUniversity": rsoUniversity
+        };
+
+backend ---> frontend
+ ?
+
+
+
+************************************************************************************
+
+"Create Event" click  (main.js line 260)
+
+Frontend ---> backend
+
+var obj = {
+          "eventTitle": eventTitle,
+            "eventDesription": eventDescription,
+            "eventType": eventType,
+            "eventUniversity": eventUniversity,
+            "eventLatitude": latitude,
+            "eventLongitude": longitude
+        };
+
+
+backend ---> frontend
+ ?
 
