@@ -96,8 +96,8 @@ form button{
 
 }
 
-.thead-dark{
-    background-color: #343a40;
+.table-dark{
+    background-color: #343a40!important;
 }
 
 tbody tr:hover{
