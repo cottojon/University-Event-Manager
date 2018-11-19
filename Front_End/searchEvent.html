@@ -1,4 +1,8 @@
 <!doctype html>
+<?php
+require_once 'session.php';
+require('connect.php');
+?>
 <html lang="en">
 
 <head>
@@ -17,7 +21,7 @@
     <!--Nav bar with new user heading-->
     <nav class="navbar  navbar-dark bg-dark">
         <a class="nav-item nav-link float-left" href="{{ url_for('login') }}">Home</a>
-        <a class="nav-item nav-link float-right" href="{{ url_for('login') }}">Log Out</a>
+        <a class="nav-item nav-link float-right" href="logout.php">Log Out</a>
     </nav>
 
 
@@ -28,22 +32,25 @@
         <div class="row justify-content-center">
             <form>
                 <div class="form-group">
-                    <label for="eventInputKeyword">Event Keyword</label>
-                    <input type="text" class="form-control" id="eventInputKeyword" placeholder="Resume Workshop">
+                    <label for="inputKeyword">Event Keyword</label>
+                    <input type="text" class="form-control" id="inputAddress" name="key" placeholder="Resume Workshop">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                        <label for="eventInputUniversity">University</label>
-                        <select id="eventInputUniversity" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>University of Central Florida</option>
+                        <label for="inputState">University</label>
+                        <select id="inputState" class="form-control">
+						<option selected>Choose...</option>
+						<? php
+							require_once 'universityDropdown.php';
+							?>                            
+                            <!--<option>University of Central Florida</option>
                             <option>University of Florida</option>
-                            <option>University of Miami</option>
+                            <option>University of Miami</option>-->
                         </select>
                     </div>
                     <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                        <label for="eventInputType">Event Type</label>
-                        <select id="eventInputType" class="form-control">
+                        <label for="inputState">Event Type</label>
+                        <select id="inputState" class="form-control">
                             <option selected>Choose...</option>
                             <option>Social</option>
                             <option>Fundraising</option>
@@ -59,18 +66,19 @@
 
 
     <div class="table-responsive searchTable">
-        <table class="table table-dark table-hover">
-            <thead >
+        <table class="table table-hover">
+            <thead class="thead-dark">
                 <!--use data-eventID attribute to keep track of eventID for the event row click post request what event is clicked -->
-                <tr data-eventID="">
+				<tr data-eventID="">
                     <th>#</th>
-                    <th>Header</th>
+                    <th>Title</th>
                     <th>Header</th>
                     <th>Header</th>
                     <th>Header</th>
                 </tr>
             </thead>
             <tbody>
+			
                 <tr>
                     <td>1,001</td>
                     <td>Lorem</td>
