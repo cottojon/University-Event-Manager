@@ -6,6 +6,7 @@
 	$user = $_POST['username'];
 	$pass = md5($_POST['password']);
 	$conf = md5($_POST['confirm_password']);
+	$email = $_POST['email'];
 	
 	// Check to see if any criteria are missing or mismatched passwords.
 	if(empty($user))
@@ -65,8 +66,8 @@
 		$isStudent = 1;
 		
 		// Insert user into database
-		$sqlInsert = "INSERT INTO users (userName, password, isStudent)
-					  VALUES (?, ?, ?)";
+		$sqlInsert = "INSERT INTO users (userName, password, isStudent, email)
+					  VALUES (?, ?, ?, ?)";
 		
 		$query = mysqli_prepare($connect, $sqlInsert);
 		if(!$query)
@@ -75,7 +76,7 @@
 			exit(mysqli_error($connect));
 		}
 		
-		$query->bind_param('ssi', $user, $pass, $isStudent);
+		$query->bind_param('ssis', $user, $pass, $isStudent, $email);
 		if(!$query->execute())
 		{
 			echo 'second prep stmt failed\n';
@@ -85,6 +86,22 @@
 		$query->free_result();
 		$query->close();
 		
+		$sql = "INSERT INTO student(userID, StudentID)
+				(SELECT userID, userID
+				 FROM users
+				 WHERE userName = '$user')";
+				
+		$stmt = mysqli_query($connect, $sql);
+		/*		
+		$stmt = mysqli_prepare($connect, $sql);
+		$stmt->bind_param('s', $user);
+		$stmt->execute();
+	
+		$stmt->free_result();
+		$stmt->close();
+		*/
+	}
+		/*
 		$sqlGetID = "SELECT userID
 					 FROM users
 					 WHERE username = ?";
@@ -111,6 +128,6 @@
 		
 		
 	}
-	
+	*/
 	// Log user in
 	include 'loginUser.php';
