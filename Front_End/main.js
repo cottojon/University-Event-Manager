@@ -263,8 +263,7 @@ $(function () {
         console.log(emailFlag);
 
         //if true alert user and return
-        if(emailFlag)
-        {
+        if (emailFlag) {
             alert("Emails Must Be Different!");
             return;
         }
@@ -276,17 +275,18 @@ $(function () {
             "rsoDesription": rsoDescription,
             "rsoType": rsoType,
             "rsoUniversity": rsoUniversity,
-            "adminEmail" : adminEmail,
-            "student2Email" : studemt2Email,
-            "student3Email" : studemt3Email,
-            "student4Email" : studemt4Email,
-            "student5Email" : studemt5Email,
+            "adminEmail": adminEmail,
+            "student2Email": studemt2Email,
+            "student3Email": studemt3Email,
+            "student4Email": studemt4Email,
+            "student5Email": studemt5Email,
         };
 
 
         //stringify the object we can only send string in json format
         var jsonRSO = JSON.stringify(obj);
 
+        //testing purposes
         console.log(jsonRSO);
 
         $.ajax({
@@ -303,6 +303,117 @@ $(function () {
     });;
 
 
+
+
+    //create event button clicked function
+    $('#createEventBtn').on('click', function (e) {
+        e.preventDefault(); //stop automatic refreshing
+        console.log("in create event function");
+
+
+        //get event info
+        var eventTitle = $('#eventTitle').val();
+        var eventDescription = $('#eventDescription').val();
+        var eventType = $('#eventType option:selected').text();
+        var eventUniversity = $('#eventUniversity option:selected').text();
+        var lengthOfEvent = $('#lengthOfEvent').val();
+        var startTime = $('#startTime').val();
+        var date = $('#dateOfEvent').val();
+        var contactPhone = $('#contactPhone').val();
+        var contactEmail = $('#contactEmail').val();
+        var eventAddress = $('#eventAddress').val();
+        var rsoName = $('#rsoName').val();
+
+
+        //get marker lat and longitude
+        var latitude = marker.position.lat();
+        var longitude = marker.position.lng();
+
+
+        //testing purposes view in  chrome/fireforx console if needed
+        console.log(lengthOfEvent);
+        console.log(startTime);
+        console.log(eventTitle);
+        console.log(eventDescription);
+        console.log(eventType);
+        console.log(eventUniversity);
+        console.log(latitude);
+        console.log(longitude);
+        console.log(date);
+        console.log(contactPhone);
+        console.log(contactEmail);
+        console.log(eventAddress);
+        console.log(rsoName);
+        
+
+        //create json object
+        var obj = {
+            "eventTitle": eventTitle,
+            "eventDesription": eventDescription,
+            "eventType": eventType,
+            "eventUniversity": eventUniversity,
+            "eventLatitude": latitude,
+            "eventLongitude": longitude,
+            "lengthOfEvent": lengthOfEvent,
+            "startTime": startTime,
+            "date" : date,
+            "contactPhone" : contactPhone,
+            "contactEmail" : contactEmail,
+            "eventAddress" : eventAddress,
+            "rsoName" : rsoName
+        };
+
+        //stringify the object because we can only send string in json format
+        var jsonRSO = JSON.stringify(obj);
+
+        console.log(jsonRSO);
+
+
+        $.ajax({
+            type: "POST", //type of request
+            url: "createevent.php", //send to this end point
+            data: jsonRSO, //the json we are sending
+            sucess: function (message) { //what happens if we are succesful, message will be json response from backend
+
+            },
+            error: function () { //what happens if the ajax request fails
+                alert("Server Error");
+            }
+        });
+
+    });
+
+
+
+
+/* light need to do server side
+    //rsoPage isUserAdmin to create Event ?
+    $('#creatEventLink').load(function () {
+        var data; //so you need userID?
+        console.log($('#createEventLinK'));
+
+        console.log("in here");
+
+        $.ajax({
+            type: "POST", //type of request
+            url: "isUserAdmin.php", //send to this endpoint
+            data: data, //the json being sentr
+            sucess: function (message) { //if successful do this, message will be json response from backend
+                //do nothing link is active by default
+            },
+            error: function (message) { //if ajax request fails do this, message will be json response from backend
+                //remove link from DOM
+                console.log($('#createEventLink').parent());
+                // $('#createEventLink').parent().detach(); //detach link so it won't show up
+                $('#createEventLink').parent().removeClass('active');
+                $('#createEventLink').parent().addClass('disabled');
+
+                alert("failure");
+            }
+        });
+    });
+
+*/
 
 
 });//end of jquery function

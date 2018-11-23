@@ -133,17 +133,24 @@ backend ---> frontend
 
 ************************************************************************************
 
-"Create Event" click  (main.js line 260)
+"Create Event" click  (main.js line 308)
 
 Frontend ---> backend
 
 var obj = {
-          "eventTitle": eventTitle,
+            "eventTitle": eventTitle,
             "eventDesription": eventDescription,
             "eventType": eventType,
             "eventUniversity": eventUniversity,
             "eventLatitude": latitude,
-            "eventLongitude": longitude
+            "eventLongitude": longitude,
+            "lengthOfEvent": lengthOfEvent,
+            "startTime": startTime,
+            "date" : date,
+            "contactPhone" : contactPhone,
+            "contactEmail" : contactEmail,
+            "eventAddress" : eventAddress,
+            "rsoName" : rsoName
         };
 
 
