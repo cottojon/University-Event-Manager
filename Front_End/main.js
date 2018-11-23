@@ -1,12 +1,24 @@
 
+//check is any emails that are the same
+function checkAnySameEmails(admin, student2, student3, student4, student5) {
+    if (admin === student2 || admin === student3 || admin === student4 || admin === student5)
+        return true;
+    if (student2 === student3 || student2 === student4 || student2 === student5)
+        return true;
+    if (student3 === student4 || student3 === student5)
+        return true;
+    if (student4 === student5)
+        return true;
 
 
+    return false;
+}
 
 
 //jquery functions
 $(function () {
 
-    
+
 
     //card text limit
     $("p.card-text").text(function (index, currentText) {
@@ -215,37 +227,80 @@ $(function () {
     });
 
 
-    $('#createRSOBtn').on('click', function () {
-        console.log("in hererereer");
+    //create rso button click function
+    $('#createRSOBtn').on('click', function (e) {
+        console.log("in create rso function");
+
+        e.preventDefault(); //stop automatic refreshing
+
+
         //get rso info
-        var rsoTitle = $('#rsoTitle').text();
-        var rsoDescription = $('#rsoDescription').text();
+        var rsoTitle = $('#rsoTitle').val();
+        var rsoDescription = $('#rsoDescription').val();
         var rsoType = $('#rsoType option:selected').text();
         var rsoUniversity = $('#university option:selected').text();
+        var adminEmail = $('#adminEmail').val();
+        var studemt2Email = $('#student2Email').val();
+        var studemt3Email = $('#student3Email').val();
+        var studemt4Email = $('#student4Email').val();
+        var studemt5Email = $('#student5Email').val();
+
+
+
+        //testing purposes
+        console.log(rsoTitle);
+        console.log(rsoDescription);
+        console.log(rsoType);
+        console.log(rsoUniversity);
+        console.log(adminEmail);
+        console.log(studemt2Email);
+        console.log(studemt3Email);
+        console.log(studemt4Email);
+        console.log(studemt5Email);
+
+        //check to see if all emails are different
+        var emailFlag = checkAnySameEmails(adminEmail, studemt2Email, studemt3Email, studemt4Email, studemt5Email)
+        console.log(emailFlag);
+
+        //if true alert user and return
+        if(emailFlag)
+        {
+            alert("Emails Must Be Different!");
+            return;
+        }
+
 
         //create json object
         var obj = {
             "rsoTitle": rsoTitle,
             "rsoDesription": rsoDescription,
             "rsoType": rsoType,
-            "rsoUniversity": rsoUniversity
+            "rsoUniversity": rsoUniversity,
+            "adminEmail" : adminEmail,
+            "student2Email" : studemt2Email,
+            "student3Email" : studemt3Email,
+            "student4Email" : studemt4Email,
+            "student5Email" : studemt5Email,
         };
 
-        //stringify the object
+
+        //stringify the object we can only send string in json format
         var jsonRSO = JSON.stringify(obj);
 
+        console.log(jsonRSO);
+
         $.ajax({
-            type: "POST",
-            url: "createRSO.php",
-            data: jsonRSO,
-            sucess: function () {
+            type: "POST", //type of request
+            url: "createRSO.php", //send to this endpoint
+            data: jsonRSO, //the json being sentr
+            sucess: function (message) { //if successful do this, message will be json response from backend
 
             },
-            error: function () {
-                console.log("failedddd");
+            error: function (message) { //if ajax request fails do this, message will be json response from backend
+                alert(message);
             }
         });
-    });
+    });;
 
 
 
