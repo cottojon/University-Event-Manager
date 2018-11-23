@@ -2,15 +2,18 @@
 	require_once 'session.php';
 	require('connect.php');
 	
-	// Take in 5 emails
-	$memberOne = $_POST['memberOne'];
-	$memberTwo = $_POST['memberTwo'];
-	$memberThree = $_POST['memberThree'];
-	$memberFour = $_POST['memberFour'];
-	$memberFive = $_POST['memberFive'];
+	$data = json_decode("main.js");
 	
-	$rsoMembers = array($memberOne, $memberTwo, $memberThree, $memberFour, $memberFive);
-	$email = explode("@", $memberOne);
+	// Take in 5 emails
+	$memberOne = $_POST['email1'];
+	$memberTwo = $_POST['email2'];
+	$memberThree = $_POST['email3'];
+	$memberFour = $_POST['email4'];
+	$memberFive = $_POST['email5'];
+	
+	$rsoMembers = array($adminEmail, $student2Email, $student3Email, $student4Email, $student5Email);
+	
+	$email = explode("@", $adminEmail);
 	$domain = $email[1];
 	
 	$index = 1;
@@ -19,7 +22,7 @@
 		$temp = explode("@", $rsoMembers[$index]);
 		if($temp[1] != $domain)
 		{
-			json_encode("Emails must have the same domain.");
+			echo json_encode("Emails must have the same domain.");
 			break;
 		}
 		$index++;
@@ -50,50 +53,43 @@
 	}
 	$stmt->free_result();
 	$stmt->close();
-	
+	*/
 	// Create RSO by adding it to the rso table and making it active with its first 5 members
-	$title = $_POST['rsoTitle'];
-	$university = $_POST['rsoUniversity'];
-	$description = $_POST['rsoDescription'];
+	//$title = $_POST['rsoTitle'];
+	//$university = $_POST['rsoUniversity'];
+	//$description = $_POST['rsoDescription'];
+	//$one = 1;
 	
 	$sql = "INSERT INTO rso(rsoName, numStudents, isActive)
-			VALUES(?, ?, ?)";
+			VALUES($rsoTitle, 5, 1)";
 			
-	$stmt = mysqli_prepare($connect, $sql);
-	$stmt->bind_param('sii', $title, 5, 1);
-	$stmt->execute();
+	$stmt = mysqli_query($connect, $sql);
 	
-	$stmt->free_result();
-	$stmt->close();
+	mysqli_close($connect);
 	
 	$index = 0;
 	while($index < 5)
 	{		
 		// get rsoId from rso table and add student and rso to rsoStudents table
 		$getId = "INSERT INTO rsoStudents(rsoID, StudentID)
-				  SELECT r.rsoID, u.userID
-				  FROM rso r, users u
-				  WHERE r.rsoName = $title
-						and u.email = ?";
+				  SELECT r.rsoID, s.StudentID
+				  FROM rso r, student s
+				  WHERE r.rsoName = $rsoTitle
+						and s.StudentID = (SELECT userID
+										   FROM users
+										   WHERE email = rsoMembers[$index])";
 						
-		$stmt = mysqli_prepare($connect, $getID);
-		$stmt->bind_param('s', $rsoMembers[$index]);
-		$stmt->execute();
-		
+		$result = mysqli_query($connect, $getId);
 		$index++;
-	}	
-	$stmt->free_result();
-	$stmt->close();
+	}
+	mysqli_close($connect);
 	
 	// Set the first email entry to be the admin.
 	$sql = "UPDATE users
 			SET isAdmin = 1
-			WHERE email = ?";
+			WHERE email = $memberOne";
 			
-	$stmt = mysqli_prepare($connect, $sql);
-	$stmt->bind_param('s', $memberOne);
-	$stmt->execute();
+	$stmt = mysqli_query($connect, $sql);
+	mysqli_close($connect);
 	
-	$stmt->free_result();
-	$stmt->close();
 ?>
