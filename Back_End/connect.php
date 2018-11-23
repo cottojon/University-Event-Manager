@@ -1,5 +1,6 @@
 <?php
-
+	require_once 'session.php';
+	
 	$server = 'dbschedule.cm0a6cdoupkr.us-east-1.rds.amazonaws.com';
 	$user = 'Ashley';
 	$password = 'Sunshine1916';

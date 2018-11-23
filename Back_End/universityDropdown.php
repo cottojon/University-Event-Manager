@@ -1,14 +1,17 @@
+<!DOCTYPE html>
+<script>
+	console.log("in university dropdown");
+</script>
 <?php
 	require('connect.php');
-	$query = "SELECT uniID, uniName
-			  FROM ?";
+	$query = "SELECT uniName
+			  FROM university";
 	$result = mysqli_prepare($connect, $query);
 	$result->bind_param('s', "university");
 	$result->execute();
 	while($row = $result->fetch_assoc()) {
-		?> <option value="<? php $row['uniID']?>"><? php$row['uniName']?></option>;
-	<? php}?>
-	<? php
-	$result->free_result();
-	$result->close();
+		echo "<option value='" . $row['uniName'] ."'>" . $row['uniName'] ."</option>";
+	}
+	//$result->free_result();
+	//$result->close();
 ?>

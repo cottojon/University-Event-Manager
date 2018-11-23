@@ -9,7 +9,7 @@ $sql = "SELECT eventName, contactEmailAddress, eventDescription, eventID
 						  WHERE StudentID = '".$_SESSION['logged-in-user']."')";
 					   
 $result = mysqli_query($connect, $sql);
-$events = array();
+$userEvents = array();
 while($row = mysqli_fetch_assoc($result))
 {
 	$currEvent = array('eventTitle' => $row['eventName'], 
@@ -18,8 +18,9 @@ while($row = mysqli_fetch_assoc($result))
 					   'eventID' => $row['eventID']
 					  );
 				   
-	array_push($events, $currEvent);
+	array_push($userEvents, $currEvent);
 }
-
-echo json_encode($events);
-
+$result->close();
+$result->free();
+echo json_encode($userEvents);
+?>

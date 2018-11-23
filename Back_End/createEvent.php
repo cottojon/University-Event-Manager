@@ -1,3 +1,5 @@
+<!doctype html>
+<script> console.log("createphp"); </script>
 <? php
 	require_once 'session.php';
 	require('connect.php');
@@ -9,13 +11,12 @@
 	require_once 'getUniversityFunction.php';
 	$uid = getUniversityIdByName($university);
 		
-	$query = "INSERT INTO events(eventName, uniID, eventDescription)
+	$query = "INSERT INTO events('eventName', 'uniID', 'eventDescription')
 			  VALUES (?, ?, ?)";
 			  
 	$stmt = mysqli_prepare($connect, $query);
 	$stmt->bind_param('sis', $title, $uid, $description);
-	if(!$stmt->execute())
-		echo 'no execution';
+	$stmt->execute();
 	
 	$stmt->free_result();
 	$stmt->close();
