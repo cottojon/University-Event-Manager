@@ -53,7 +53,7 @@
                     <div class="form-group col-sm-6 col-md-6 col-lg-6">
                         <label for="eventType">Event Type</label>
                         <select id="eventType" class="form-control">
-						<!--is there a way to get the drop down from the list of universities in the database?-->
+                            <!--is there a way to get the drop down from the list of universities in the database?-->
                             <option selected>Choose...</option>
                             <option>Social</option>
                             <option>Fundraising</option>
@@ -61,16 +61,19 @@
                             <option>Career</option>
                         </select>
                     </div>
-					<div class="form-group">
-						<label for="startTime">Event Title</label>
-						<input type="text" class="form-control" id="eventTitle" placeholder="Resume Workshop">
-					</div>
-					<div class="form-group row">
-						<!--military time to avoid having to deal with am and pm-->
-						<label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="lengthOfEvent">Length of Event (min)</label>
-						<input name="lengthOfEvent" type="int" class="form-control col-lg-10 col-sm-9 col-md-8" id="lengthOfEvent" 
-                        required="">
-					</div>
+
+                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                        <label class="col-form-label col-lg-6 col-sm-6 col-md-6" for="startTime">Start Time</label>
+                        <input type="text" class="form-control" id="startTime" placeholder="0700 military time" required="">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                        <!--military time to avoid having to deal with am and pm-->
+                        <label class="col-form-label col-lg-6 col-sm-6 col-md-6" for="lengthOfEvent">Length of
+                            Event (min)</label>
+                        <input name="lengthOfEvent" type="int" class="form-control col-lg-10 col-sm-9 col-md-8" id="lengthOfEvent"
+                            required="" placeholder="60">
+                    </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-12">
                         <label for="eventDescription">Event Description</label>
                         <textarea class="form-control" id="eventDescription" rows="3"></textarea>
@@ -110,8 +113,7 @@
 
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEYGOESHERE&callback=initMap"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEYGOESHERE&callback=initMap" async defer></script>
 
 
 
