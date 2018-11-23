@@ -293,8 +293,9 @@ $(function () {
             type: "POST", //type of request
             url: "createRSO.php", //send to this endpoint
             data: jsonRSO, //the json being sentr
-            sucess: function (message) { //if successful do this, message will be json response from backend
-
+            success: function (message) { //if successful do this, message will be json response from backend
+                console.log(message);
+                alert("front end to backend works");
             },
             error: function (message) { //if ajax request fails do this, message will be json response from backend
                 alert(message);
@@ -373,11 +374,12 @@ $(function () {
             type: "POST", //type of request
             url: "createevent.php", //send to this end point
             data: jsonRSO, //the json we are sending
-            sucess: function (message) { //what happens if we are succesful, message will be json response from backend
-
+            success: function (message) { //what happens if we are succesful, message will be json response from backend
+                console.log(message);
+                alert("front end to backend works");
             },
-            error: function () { //what happens if the ajax request fails
-                alert("Server Error");
+            error: function (message) { //what happens if the ajax request fails
+                alert("Conflicting Locations and Time");
             }
         });
 
