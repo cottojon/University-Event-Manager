@@ -305,7 +305,7 @@ $(function () {
 
 
 
-     //create event button clicked function
+    //create event button clicked function
     $('#createEventBtn').on('click', function (e) {
         e.preventDefault(); //stop automatic refreshing
         console.log("in create event function");
@@ -318,6 +318,11 @@ $(function () {
         var eventUniversity = $('#eventUniversity option:selected').text();
         var lengthOfEvent = $('#lengthOfEvent').val();
         var startTime = $('#startTime').val();
+        var date = $('#dateOfEvent').val();
+        var contactPhone = $('#contactPhone').val();
+        var contactEmail = $('#contactEmail').val();
+        var eventAddress = $('#eventAddress').val();
+        var rsoName = $('#rsoName').val();
 
 
         //get marker lat and longitude
@@ -334,6 +339,11 @@ $(function () {
         console.log(eventUniversity);
         console.log(latitude);
         console.log(longitude);
+        console.log(date);
+        console.log(contactPhone);
+        console.log(contactEmail);
+        console.log(eventAddress);
+        console.log(rsoName);
         
 
         //create json object
@@ -345,11 +355,18 @@ $(function () {
             "eventLatitude": latitude,
             "eventLongitude": longitude,
             "lengthOfEvent": lengthOfEvent,
-            "startTime": startTime
+            "startTime": startTime,
+            "date" : date,
+            "contactPhone" : contactPhone,
+            "contactEmail" : contactEmail,
+            "eventAddress" : eventAddress,
+            "rsoName" : rsoName
         };
 
         //stringify the object because we can only send string in json format
         var jsonRSO = JSON.stringify(obj);
+
+        console.log(jsonRSO);
 
 
         $.ajax({
@@ -365,6 +382,7 @@ $(function () {
         });
 
     });
+
 
 
 
