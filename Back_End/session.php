@@ -3,7 +3,6 @@
 	
 	function logUserIn($userId) {
 		$_SESSION['logged-in-user'] = $userId; // Add data to session.
-		$_SESSION['student'] = $userId;
 		header('Location: index.html');// Headers before output
 		exit(0);
 	}
