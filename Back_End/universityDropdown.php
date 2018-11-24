@@ -14,4 +14,5 @@
 	}
 	//$result->free_result();
 	//$result->close();
+	//mysqli_close($connect); CHANGE TO NOT PREP STATEMENT???
 ?>

@@ -22,7 +22,7 @@
 												
 		$anotherVar = $getEventName->fetch_assoc();
 		$name = $anotherVar["name"];
-		
+		mysqli_close($connect);
 		echo $name;
 	}
 	

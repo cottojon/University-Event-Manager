@@ -10,6 +10,7 @@
 			VALUES($rso, $_SESSION['logged-in-user'])";
 	
 	$result = mysqli_query($connect, $sql);
+	mysqli_close($connect);
 	
 	// Update numstudents in rso.
 	$updateNumStudents = "UPDATE rso
@@ -17,4 +18,5 @@
 						  WHERE rsoID = $rso";
 						  
 	$update = mysqli_query($connect, $sql);
+	mysqli_close($connect);
 ?>

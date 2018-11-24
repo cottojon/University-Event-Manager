@@ -92,6 +92,7 @@
 				 WHERE userName = '$user')";
 				
 		$stmt = mysqli_query($connect, $sql);
+		mysqli_close($connect);
 		/*		
 		$stmt = mysqli_prepare($connect, $sql);
 		$stmt->bind_param('s', $user);

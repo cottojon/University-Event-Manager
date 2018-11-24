@@ -20,7 +20,7 @@ while($row = mysqli_fetch_assoc($result))
 				   
 	array_push($rsos, $currRso);
 }
-
+mysqli_close($connect);
 echo json_encode($rsos);
 
 //$sql->free_result();

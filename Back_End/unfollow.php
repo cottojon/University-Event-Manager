@@ -18,4 +18,5 @@
 				AND StudentID = $_SESSION['logged-in-user']";
 				
 	$delete = mysqli_query($connect, $query);
+	mysqli_close($connect);
 ?>

@@ -20,7 +20,6 @@ while($row = mysqli_fetch_assoc($result))
 				   
 	array_push($userEvents, $currEvent);
 }
-$result->close();
-$result->free();
+mysqli_close($connect);
 echo json_encode($userEvents);
 ?>

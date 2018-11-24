@@ -21,5 +21,6 @@
 						 
 		array_push($send, $currRow);
 	}
+	mysqli_close($connect);
 	echo json_encode($send);
 ?>

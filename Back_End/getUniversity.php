@@ -1,16 +1,15 @@
-<? php
-	//require_once 'session.php';
+<?php
+	require_once 'session.php';
 	require('connect.php');
 	
 	function getUniversityIdByName($name) {
 		$sql = "SELECT uniID
 				FROM university
-				WHERE uniName = ?";
+				WHERE uniName = $name";
 				
-		$result = mysqli_prepare($connect, $sql);
-		$result -> bind_param('s', $name);
-		$result -> bind_result($id);
-		$result -> execute();
-		return $id;
+		$result = mysqli_query($connect, $sql);
+		
+		return $result;
+		mysqli_close($connect);
 	}
 ?>

@@ -2,10 +2,18 @@
 	require_once 'session.php';
 	require('connect.php');
 	
-	$data = json_decode("main.js");
+	$data = json_decode("jsonRSO");
 	
+	var_dump($data);
+	
+	$sql = "INSERT INTO rso(rsoName, numStudents, isActive)
+			VALUES($data[rsoTitle], 5, 1)";
+			
+	$stmt = mysqli_query($connect, $sql);
+	
+	mysqli_close($connect);
 	// Take in 5 emails
-	$memberOne = $_POST['email1'];
+	/*$memberOne = $_POST['email1'];
 	$memberTwo = $_POST['email2'];
 	$memberThree = $_POST['email3'];
 	$memberFour = $_POST['email4'];
@@ -53,25 +61,28 @@
 	}
 	$stmt->free_result();
 	$stmt->close();
-	*/
+	
 	// Create RSO by adding it to the rso table and making it active with its first 5 members
 	//$title = $_POST['rsoTitle'];
 	//$university = $_POST['rsoUniversity'];
 	//$description = $_POST['rsoDescription'];
 	//$one = 1;
 	
+	
+	
+	//*****************************************************************
 	$sql = "INSERT INTO rso(rsoName, numStudents, isActive)
 			VALUES($rsoTitle, 5, 1)";
 			
 	$stmt = mysqli_query($connect, $sql);
 	
 	mysqli_close($connect);
-	
-	$index = 0;
-	while($index < 5)
+	*/
+	//$index = 0;
+	/*while($index < 5)
 	{		
-		// get rsoId from rso table and add student and rso to rsoStudents table
-		$getId = "INSERT INTO rsoStudents(rsoID, StudentID)
+		get rsoId from rso table and add student and rso to rsoStudents table
+		$getId = "INSERT INTO rsoStudents(StudentID)
 				  SELECT r.rsoID, s.StudentID
 				  FROM rso r, student s
 				  WHERE r.rsoName = $rsoTitle
@@ -83,13 +94,13 @@
 		$index++;
 	}
 	mysqli_close($connect);
-	
+	*/
 	// Set the first email entry to be the admin.
-	$sql = "UPDATE users
+	/*$sql = "UPDATE users
 			SET isAdmin = 1
 			WHERE email = $memberOne";
 			
 	$stmt = mysqli_query($connect, $sql);
 	mysqli_close($connect);
-	
+	*/
 ?>
