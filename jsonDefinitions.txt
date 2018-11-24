@@ -106,35 +106,51 @@ Backend ---> Frontend
 
 ***********************************************************************************
 
-"Create RSO" click  (main.js line 218)
+"Create RSO" click  (main.js line 231)
 
 Frontend ---> backend
+
+# front end checks to make sure all emails are different
+
 
 var obj = {
             "rsoTitle": rsoTitle,
             "rsoDesription": rsoDescription,
             "rsoType": rsoType,
-            "rsoUniversity": rsoUniversity
+            "rsoUniversity": rsoUniversity,
+            "adminEmail" : adminEmail,
+            "student2Email" : studemt2Email,
+            "student3Email" : studemt3Email,
+            "student4Email" : studemt4Email,
+            "student5Email" : studemt5Email,
         };
 
 backend ---> frontend
- ?
+ # send a message if emails are not verified,
+# front end will alert the user of the message being sent
 
 
 
 ************************************************************************************
 
-"Create Event" click  (main.js line 260)
+"Create Event" click  (main.js line 308)
 
 Frontend ---> backend
 
 var obj = {
-          "eventTitle": eventTitle,
+            "eventTitle": eventTitle,
             "eventDesription": eventDescription,
             "eventType": eventType,
             "eventUniversity": eventUniversity,
             "eventLatitude": latitude,
-            "eventLongitude": longitude
+            "eventLongitude": longitude,
+            "lengthOfEvent": lengthOfEvent,
+            "startTime": startTime,
+            "date" : date,
+            "contactPhone" : contactPhone,
+            "contactEmail" : contactEmail,
+            "eventAddress" : eventAddress,
+            "rsoName" : rsoName
         };
 
 
