@@ -1,0 +1,114 @@
+
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+    padding: 0;
+    font-family: "Arial Bold";
+    background-color: lightgrey;
+}
+
+nav a{
+    color: #fff;
+    margin-left: 10px;
+}
+
+nav a:hover{
+    color: #fff;
+    border-bottom: 2px solid;
+    padding-bottom: 6px;
+}
+
+form button{
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+}
+
+#formContainer form{
+    width: 70%;
+}
+
+#forgotPasswordLink{
+    color: #343a40;
+}
+
+#formContainer{
+    margin-top: 50px;
+    color: black;
+}
+
+#loginAlert{
+    margin-top: 10px;
+}
+
+.flashes{
+	width: 30%;
+	margin: 0 auto;
+    margin-top: 10px;
+    list-style-type: none;
+    text-align: center;
+}
+
+#sideBarNav {
+    position: fixed;
+    height: 100%;
+    background-color: #343a40 !important;
+}
+
+.feather{
+    width: 18px;
+    height: 18px;
+}
+
+
+.icon{
+    color:#fff !important;
+}
+
+
+
+.jumbotron{
+    color: #343140;
+    margin-top: 10px;
+}
+
+.card{
+    margin-top: 15px;
+}
+
+
+
+#RSOContainer, #EventContainer{
+    background-color:  #343a40;
+    margin-top: 15px;
+}
+
+.card .btn, .modal .btnNext, .modal .btnPrevious{
+    background-color: #343a40 !important;
+    border-color: #343a40 !important
+}
+
+/* card hovering*/
+.card:hover{
+    -webkit-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+    box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+
+}
+
+.table-dark{
+    background-color: #343a40!important;
+}
+
+tbody tr:hover{
+    cursor: pointer;
+}
+
+
+.alert{
+    display: none;
+}
+
+.searchTable{
+    margin-top: 15px;
+}

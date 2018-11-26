@@ -1,3 +1,4 @@
+
 <?php
 require('connect.php');
 
@@ -5,7 +6,6 @@ if($_POST['Submit'] ) {
 	$comment = $_POST['userCommentText'];
 	$sql="INSERT INTO commentsAndRating(commentText) VALUES ('$comment')";
 	mysqli_query($connect, $sql);
-	echo $comment;
 
 }
 
@@ -77,27 +77,62 @@ if($_POST['Submit'] ) {
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-                <h1 id="eventTitle" class="display-3">EVENT NAME HERE</h1>
-                <p id="rsoName" class="lead">RSO Name Goes Here</p>
 
-                <p id="eventDescription">EVENT DESCRIPTION HERE. This is a template for a simple marketing or
-                    informational website. It
-                    includes a
-                    large callout
-                    called a jumbotron and three supporting pieces of content. Use it as a starting point to create
-                    something
-                    more
-                    unique.
-                </p>
+            <?php
+                require('connect.php');
 
-                <h6 id="eventType">Event Type <span class="badge badge-dark">Social</span></h4>
-                    <h6 id="eventUniversity">Event University <span class="badge badge-dark">University of Central
-                            Florida</span></h4>
-                        <h6 id="eventDate">Event Date <span class="badge badge-dark">11/30/18</span></h4>
-                            <h6 id="eventStartTime">Start Time <span class="badge badge-dark">0700</span></h4>
-                                <h6 id="eventLength">Event Length <span class="badge badge-dark">60 mins</span></h4>
-                                    <h6 id="eventAddress">Event Address <span class="badge badge-dark">Address</span></h4>
-                                        <h6 id="eventEmail">Contact Email <span class="badge badge-dark">email@email.com</span></h4>
+                $eventID = $_GET['eventID']; //get eventID from get request
+                $result =mysql_query("SELECT * FROM events WHERE eventID='$eventID'"); // grab all events that match eventID
+               
+                while($row=mysql_fetch_array($result)) {
+                    
+                    //get event info
+                   // $eventTitle=$row['eventName'];
+                   // $eventDescription=$row['eventDescription'];
+                   // $rsoName = $row['rsoName'];
+                    //$dateOfEvent = $row['dateOfEvent'];
+                   // $timeOfEvent = $row['timeOfEvent'];
+                   // $durationOfEvent = $row['durationOfEvent'];
+                   // $address = $row['address'];
+                   // $contactEmail = $row['contactEmailAddress'];
+                   // $contactPhone = $row['contactPhone'];
+
+                    
+                     //echo event info
+                    echo '<h1 id="eventTitle" class="display-3">';
+                    echo $row['eventName'];
+                    echo '</h1>';
+                    echo '<p id="rsoName" class="lead">';
+                    echo $row['rsoName'];
+                    echo '</p>';
+                    echo '<p id="eventDescription">';
+                    echo $row['eventDescription'];
+                    echo '</p>';
+                    echo '<h6 id="eventType">Event Type <span class="badge badge-dark"></span></h6>'; //no event type
+                    echo '<h6 id="eventUniversity">Event University <span class="badge badge-dark"></span></h6>';
+                    echo '<h6 id="eventDate">Event Date <span class="badge badge-dark">';
+                    echo $row['dateOfEvent'];
+                    echo '</span></h6>';
+                    echo '<h6 id="eventStartTime">Start Time <span class="badge badge-dark">';
+                    echo $row['timeOfEvent'];
+                    echo '</span></h6>';
+                    echo '<h6 id="eventLength">Event Length <span class="badge badge-dark">';
+                    echo $row['durationOfEvent'];
+                    echo '</span></h6>';
+                    echo '<h6 id="eventAddress">Event Address <span class="badge badge-dark">';
+                    echo $row['address'];
+                    echo '</span></h6>';
+                    echo '<h6 id="eventEmail">Contact Email <span class="badge badge-dark">';
+                    echo $row['contactEmailAddress'];
+                    echo '</span></h6>';
+                    echo '<h6 id="eventPhone">Contact Phone <span class="badge badge-dark">';
+                    echo $row['contactPhone'];
+                    echo '</span></h6>';
+                    
+                    
+                }
+               
+            ?>
 
             </div>
         </div>
@@ -107,7 +142,7 @@ if($_POST['Submit'] ) {
             <div class="row">
                 <!--comment form-->
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <form action = "eventPage.php" method = "POST">
+                    <form action = "eventPage.php<?php  require('connect.php'); $eventID = $_GET['eventID']; echo $eventID ?>" method = "POST">
                         <div class="form-group row">
                             <label class="col-sm-6 col-md-4 col-lg-2" for="userCommentTextBox" class="col-sm-2 col-form-label">Comment</label>
                             <div class="col-sm-6 col-md-8 col-lg-10">
@@ -128,32 +163,51 @@ if($_POST['Submit'] ) {
 
         <div class="container">
             <h2 class="text-center">Comments</h2>
-	<?php
-	require('connect.php');
-	//echo "starting";
-	//get the data
-	//function printStuff(){
-	$result =mysql_query("SELECT * FROM commentsAndRating");
-	//results=mysql_query($connect,$query);
-	//echo $query;
-	//mysqli_query($connect, $query)
-	while($row=mysql_fetch_array($result)) {
+	            <?php
+	            require('connect.php');
+	                    //echo "starting";
+	                //get the data
+	                    //function printStuff(){
+    
+
+                         //get eventID through get variable
+                     $eventID = $_GET['eventID']; //get eventID from get request
+	                    $result =mysql_query("SELECT * FROM commentsAndRating");
+	                    //results=mysql_query($connect,$query);
+	                    //echo $query;
+	                    //mysqli_query($connect, $query)
+	                while($row=mysql_fetch_array($result)) {
 		
-		$id=$row['commentID'];
-		$comment=$row['commentText'];
-		echo $comment;
-		//echo $id	.	"<br />"	.	$comment.	"<br />"	.	 "<br />";
+		                //$id=$row['commentID'];
+		                //$comment=$row['commentText'];
+	
+        
+                         echo '<div class="card">';
+                        echo '<div class="card-body">';
+                        echo '<div class="row">';
+                        echo'<div class="col-md-2 col-sm-2 col-lg-2">';
+                        echo '<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />';
+                        echo '</div>';
+                        echo '<div class="col-md-10 col-sm-10 col-lg-10">';
+                         echo '<p>';
+                        echo '<strong class="float-left">User</strong>';
+                         echo '</p>';
+                        echo '<div class="clearfix"></div>';
+                        echo '<p>';
+                        echo $row['commentText'];
+                        echo '</p>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
 		
 		
-	} 
-		?>
+	                } 
+	            ?>
+        
+        
+        
         </div>
-<!--	<table>
-	<tr><td>Id: </td><td><input type="int" name="id"  /></td></tr>
-	<tr><td colspan="2">Comment: </td></tr> 
-	<tr><td colspan="2"><textarea name="comment"></texarea></td></tr> -->
-
-
     </main>
 	
 
